@@ -3,7 +3,9 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <section class="mx-auto h-screen bg-gray-50 bg-repeat bg-cover" style="background-image: url({{ asset('images/home-bg.jpg') }})">
+    <section class="mx-auto h-screen bg-gray-50 bg-repeat bg-cover"
+             id="accueil"
+             style="background-image: url({{ asset('images/home-bg.jpg') }})">
         <div class="flex items-center h-full px-2 sm:px-2 md:px-4 lg:px-40">
             <div class="sm:w-auto md:w-1/2 xl:1/2 px-4">
                 <p class="text-2xl text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400 py-2 sm:py-2 ld:py-4 lg:py-4">
@@ -25,7 +27,7 @@
             </div>
         </div>
     </section>
-    <section class="mx-auto py-10">
+    <section class="mx-auto py-10" id="a-propos">
         <div class="flex flex-col sm:flex-col md:flex-row lg:flex-row lg:items-center h-full sm:px-2 md:px-4 lg:px-40 py-4">
             <div class="w-auto sm:w-auto md:w-1/2 xl:1/2 px-4">
                 <p class="text-2xl text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400 py-2 sm:py-2 ld:py-4 lg:py-4">
@@ -65,32 +67,11 @@
     </section>
     <section class="mx-auto py-10 bg-gray-50">
         <div class="flex flex-col items-center h-full sm:px-2 md:px-4 lg:px-40 py-4">
-            <p class="text-2xl text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">Mon
+            <p class="text-2xl text-transparent text-center bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">
+                Mon
                 portfolio,</p>
-            <h2 class="text-5xl text-zinc-800 py-2 sm:py-2 ld:py-4 lg:py-8">Mes derniers projets</h2>
-            <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols:3 lg:grid-cols-3 mx-auto py-8">
-                {% for project in projects %}
-                    <article
-                            class="mx-auto max-w-sm h-96 shadow-xl bg-cover bg-center bg-no-repeat transform duration-500 hover:-translate-y-2 cursor-pointer group"
-                            style="background-image: url({{ asset('images/about.jpg') }});">
-                        <div class="bg-black bg-opacity-20 h-96 px-10 py-4 flex flex-wrap flex-col justify-end hover:bg-opacity-75 transform duration-300">
-                            <h3 class="text-white text-3xl mb-5 group-hover:mb-0 transform translate-y-20 group-hover:translate-y-0 duration-300">
-                                {{ project.name|escape }}
-                            </h3>
-                            <div class="py-2">
-                                {% for category in project.categories %}
-                                    <a href="#">
-                                        <span class="inline bg-gradient-to-br from-pink-500 to-orange-400 opacity-0 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full group-hover:opacity-80 transform duration-500  hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200">{{ category.name|escape }}</span>
-                                    </a>
-                                {% endfor %}
-                            </div>
-                            <p class="opacity-0 text-white text-xl group-hover:opacity-80 transform duration-500">
-                                {{ project.description|escape|slice(0, 70)|split(' ')|slice(0, -1)|join(' ') }}...
-                            </p>
-                        </div>
-                    </article>
-                {% endfor %}
-            </div>
+            <h2 class="text-5xl text-center text-zinc-800 py-2 sm:py-2 ld:py-4 lg:py-8">Mes derniers projets</h2>
+            {{ include('commons/_projects.html.twig', { projects: projects }) }}
             <div class="flex justify-center items-center py-4">
                 <a href="#"
                    class="text-white bg-gradient-to-br from-pink-500 to-orange-400
@@ -102,7 +83,7 @@
             </div>
         </div>
     </section>
-    <section class="mx-auto py-10 ">
+    <section class="mx-auto py-10" id="contact">
         <div class="flex flex-col items-center h-full sm:px-2 md:px-4 lg:px-40 py-4">
             <p class="text-2xl text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">Me
                 contacter,</p>
@@ -111,7 +92,7 @@
                 Vous avez un projet ? Vous avez une question ? N'hésitez pas à me contacter, je vous répondrai dans les
                 plus brefs délais.
             </p>
-            <form action="#" class="space-y-8 w-1/2">
+            <form action="#" class="space-y-8 w-full lg:w-1/2 px-2">
                 <div>
                     <label for="email"
                            class="block mb-2 text-sm font-medium text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">Votre

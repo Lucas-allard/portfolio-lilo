@@ -13,7 +13,7 @@ class ProjectFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $project = new Project();
 
             $projectName = $faker->words(3, true);

@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/project', name: 'project')]
 class ProjectController extends AbstractController
 {
     #[Route('/', name: '_index')]

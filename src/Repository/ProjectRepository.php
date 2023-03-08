@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Project;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,6 +39,16 @@ class ProjectRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findByCategory(Category $category): array
+    {
+        $qb = $this->createQueryBuilder("p")
+            ->where(':category MEMBER OF p.categories')
+            ->setParameters(array('category' => $category));
+
+        return $qb->getQuery()->getResult();
+    }
+
 
 //    /**
 //     * @return Project[] Returns an array of Project objects
