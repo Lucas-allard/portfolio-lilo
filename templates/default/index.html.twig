@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <section class="mx-auto h-screen bg-gray-50 bg-repeat bg-cover" style="background-image: url({{ asset('images/home-bg.jpg') }})">
+        <div class="flex items-center h-full px-2 sm:px-2 md:px-4 lg:px-40">
+            <div class="sm:w-auto md:w-1/2 xl:1/2 px-4">
+                <p class="text-2xl text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400 py-2 sm:py-2 ld:py-4 lg:py-4">
+                    Bonjour, moi c'est</p>
+                <h1 class="text-5xl text-zinc-800 py-2 sm:py-2 ld:py-4 lg:py-4">Liloë</h1>
+                <p class="text-base py-2 sm:py-2 ld:py-4 lg:py-4">{{ user.bio|escape|nl2br }}</p>
+                <div class="py-4">
+                    <button class=" text-white bg-gradient-to-br from-pink-500 to-orange-400
+                            hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200
+                            dark:focus:ring-pink-800 font-medium rounded-full shadow-xl text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        Mes projets
+                    </button>
+                    <button class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l
+                            focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium
+                            rounded-full shadow-xl text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        Me contacter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mx-auto py-10">
+        <div class="flex flex-col sm:flex-col md:flex-row lg:flex-row lg:items-center h-full sm:px-2 md:px-4 lg:px-40 py-4">
+            <div class="w-auto sm:w-auto md:w-1/2 xl:1/2 px-4">
+                <p class="text-2xl text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400 py-2 sm:py-2 ld:py-4 lg:py-4">
+                    A propos de moi,</p>
+                <h2 class="text-5xl text-zinc-800 py-2 sm:py-2 ld:py-4 lg:py-4">Liloë Bartnik</h2>
+                <p class="text-base py-2 sm:py-2 ld:py-4 lg:py-4">{{ user.bio|escape|nl2br }}</p>
+                <div class="py-4">
+                    {% for skill in user.skills %}
+                        <div class="flex flex-col">
+                            <div class="flex justify-between py-2">
+                                <p class="text-base font-bold text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">{{ skill.name }}</p>
+                                <p class="text-base font-bold text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">{{ skill.percentage }}
+                                    %</p>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-gradient-to-br from-pink-500 to-orange-400 h-2.5 rounded-full"
+                                     style="width: {{ skill.percentage }}%"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="py-4">
+                    <button class="text-white bg-gradient-to-br from-pink-500 to-orange-400
+                            hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200
+                            dark:focus:ring-pink-800 font-medium rounded-full shadow-xl text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        Télécharger mon CV
+                    </button>
+                </div>
+            </div>
+            <div class="sm:w-auto md:w-1/2 xl:1/2 flex justify-center items-center px-4 relative">
+                <div class="flex justify-center items-center">
+                    <img class="h-auto max-w-xs sm:max-w-sm md:max-w-md md:ml-5 lg:ml-10 transition-transform scale-90 hover:transform-none shadow-xl"
+                         src="{{ asset('images/about.jpg') }}" alt="Image me représentant">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mx-auto py-10 bg-gray-50">
+        <div class="flex flex-col items-center h-full sm:px-2 md:px-4 lg:px-40 py-4">
+            <p class="text-2xl text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">Mon
+                portfolio,</p>
+            <h2 class="text-5xl text-zinc-800 py-2 sm:py-2 ld:py-4 lg:py-8">Mes derniers projets</h2>
+            <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols:3 lg:grid-cols-3 mx-auto py-8">
+                {% for project in projects %}
+                    <article
+                            class="mx-auto max-w-sm h-96 shadow-xl bg-cover bg-center bg-no-repeat transform duration-500 hover:-translate-y-2 cursor-pointer group"
+                            style="background-image: url({{ asset('images/about.jpg') }});">
+                        <div class="bg-black bg-opacity-20 h-96 px-10 py-4 flex flex-wrap flex-col justify-end hover:bg-opacity-75 transform duration-300">
+                            <h3 class="text-white text-3xl mb-5 group-hover:mb-0 transform translate-y-20 group-hover:translate-y-0 duration-300">
+                                {{ project.name|escape }}
+                            </h3>
+                            <div class="py-2">
+                                {% for category in project.categories %}
+                                    <a href="#">
+                                        <span class="inline bg-gradient-to-br from-pink-500 to-orange-400 opacity-0 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full group-hover:opacity-80 transform duration-500  hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200">{{ category.name|escape }}</span>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <p class="opacity-0 text-white text-xl group-hover:opacity-80 transform duration-500">
+                                {{ project.description|escape|slice(0, 70)|split(' ')|slice(0, -1)|join(' ') }}...
+                            </p>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+            <div class="flex justify-center items-center py-4">
+                <a href="#"
+                   class="text-white bg-gradient-to-br from-pink-500 to-orange-400
+                            hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200
+                            dark:focus:ring-pink-800 font-medium rounded-full shadow-xl text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                >
+                    Voir plus
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="mx-auto py-10 ">
+        <div class="flex flex-col items-center h-full sm:px-2 md:px-4 lg:px-40 py-4">
+            <p class="text-2xl text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">Me
+                contacter,</p>
+            <h2 class="text-5xl text-zinc-800 py-2 sm:py-2 ld:py-4 lg:py-8">Discutons</h2>
+            <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
+                Vous avez un projet ? Vous avez une question ? N'hésitez pas à me contacter, je vous répondrai dans les
+                plus brefs délais.
+            </p>
+            <form action="#" class="space-y-8 w-1/2">
+                <div>
+                    <label for="email"
+                           class="block mb-2 text-sm font-medium text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">Votre
+                        email</label>
+                    <input type="email" id="email"
+                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                           placeholder="adresse@mail.fr" required>
+                </div>
+                <div>
+                    <label for="subject"
+                           class="block mb-2 text-sm font-medium text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">Sujet</label>
+                    <input type="text" id="subject"
+                           class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                           placeholder="Dites moi pourquoi vous souhaitez me contacter" required>
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="message"
+                           class="block mb-2 text-sm font-medium text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-orange-400">Votre
+                        message</label>
+                    <textarea id="message" rows="6"
+                              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                              placeholder="Saisir votre message ici..."></textarea>
+                </div>
+                <button class="text-white bg-gradient-to-br from-pink-500 to-orange-400
+                            hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200
+                            dark:focus:ring-pink-800 font-medium rounded-full shadow-xl text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                        type="submit"
+                >
+                    Envoyer
+                </button>
+            </form>
+        </div>
+    </section>
+{% endblock %}
